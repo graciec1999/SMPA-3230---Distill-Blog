@@ -1,0 +1,9 @@
+---
+title: "About My April 20, 2021 Homework"
+description: |
+  As a student at the George Washington University in the School of Media and Public Affairs, I am learing to use R Studio and Distill as reporting tools.  This website is my first attempt at creating my own Distill website.  I hope you enjoy browsing!
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```

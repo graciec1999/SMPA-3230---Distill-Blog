@@ -1,0 +1,66 @@
+---
+title: "COVID-19 Deaths"
+description: |
+  COVDI-19 Deaths -- February 22, 2021
+author:
+  - name: Grace Christensen
+    url: https://example.com/norajones
+date: 04-20-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+```{r}
+
+library(tidyverse)
+library(lubridate)
+library(readxl)
+library(janitor)
+library(glue)
+library(leaflet)
+library(RColorBrewer)
+library(htmlwidgets)
+library(htmltools)
+library(tigris)
+library(tmap)
+library(tmaptools)
+
+covidcases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv")
+
+states <- tigris::states(cb=T)
+
+halfmillion <- subset(covidcases, date == "2021-02-22", select=c(state, deaths))
+
+halfmillion <- geo_join(states, halfmillion, by_sp = "NAME", by_df = "state")
+
+leaflet() %>%
+  addTiles() %>%
+  setView(-98.483330, 38.712046, zoom = 4)
+
+bins <- c(0, 100, 500, 1000, 5000, 10000, 50000, 100000, Inf)
+pal <- colorBin("YlOrRd", domain = states$deaths, bins = bins)
+
+leaflet(data = halfmillion) %>%
+  addTiles() %>%
+  setView(-98.483330, 38.712046, zoom = 4) %>%
+  addPolygons(data = halfmillion, stroke = TRUE,
+              fillColor = ~pal(deaths),
+              weight = 2,
+              opacity = 1,
+              color = "white",
+              dashArray = "3",
+              fillOpacity = 0.7) %>%
+  addLegend(pal = pal, values = ~deaths, opacity = 0.7, title = NULL, position = "bottomright")
+
+```
+
+The map above shows the daily count of total deaths in each state on February 22, 2021 -- the day the United States crossed the half-a-million-deaths mark.
+
+This data was sourced from The New York Times.

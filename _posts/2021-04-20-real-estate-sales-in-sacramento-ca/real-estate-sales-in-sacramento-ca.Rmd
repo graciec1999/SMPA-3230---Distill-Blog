@@ -1,0 +1,38 @@
+---
+title: "Real Estate Sales in Sacramento, CA"
+description: |
+  Real Estate Sales in Sacramento, CA (My hometown!)
+author:
+  - name: Grace Christensen
+    url: https://example.com/norajones
+date: 04-20-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+The following map shows residential real estate transactions in Sacramento, California.  This data does not show the sales of either condos or multi-family dwellings.
+
+Each dot represents one sale, and the size of the dot corresponds to the price of the sale.  The larger the dot, the higher the price.
+
+Enjoy!
+
+```{r}
+
+sac_sales <- read_csv("https://support.spatialkey.com/wp-content/uploads/2021/02/Sacramentorealestatetransactions.csv")
+
+residentialsales <- subset(sac_sales, type == "Residential")
+
+leaflet(data = residentialsales) %>%
+  addTiles() %>%
+  setView(-121.49935907688821, 38.62485634611972, zoom = 10) %>%
+  addCircles(lng = ~longitude, lat = ~latitude,
+             weight = 1, radius = ~sqrt(price), popup = ~city)
+  
+```
