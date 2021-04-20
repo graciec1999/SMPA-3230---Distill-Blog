@@ -40,10 +40,6 @@ halfmillion <- subset(covidcases, date == "2021-02-22", select=c(state, deaths))
 
 halfmillion <- geo_join(states, halfmillion, by_sp = "NAME", by_df = "state")
 
-leaflet() %>%
-  addTiles() %>%
-  setView(-98.483330, 38.712046, zoom = 4)
-
 bins <- c(0, 100, 500, 1000, 5000, 10000, 50000, 100000, Inf)
 pal <- colorBin("YlOrRd", domain = states$deaths, bins = bins)
 
