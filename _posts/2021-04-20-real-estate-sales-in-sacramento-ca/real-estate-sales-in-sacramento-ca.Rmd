@@ -25,7 +25,20 @@ Enjoy!
 
 ```{r}
 
-sac_sales <- read_csv("https://support.spatialkey.com/wp-content/uploads/2021/02/Sacramentorealestatetransactions.csv")
+library(tidyverse)
+library(lubridate)
+library(readxl)
+library(janitor)
+library(glue)
+library(leaflet)
+library(RColorBrewer)
+library(htmlwidgets)
+library(htmltools)
+library(tigris)
+library(tmap)
+library(tmaptools)
+
+sac_sales <- read.csv("https://support.spatialkey.com/wp-content/uploads/2021/02/Sacramentorealestatetransactions.csv")
 
 residentialsales <- subset(sac_sales, type == "Residential")
 

@@ -1,11 +1,11 @@
 ---
 title: "April 20, 2021 Homework"
 description: |
-    Welcome to my new blo!g! I created this website to disply my homework for SMPA 3230 - Reporting in the Digital Age! I hope you enjoy reading what I have to say!
+    Welcome to my new blog! I created this website to disply my homework for SMPA 3230 - Reporting in the Digital Age! I hope you enjoy reading what I have to say!
 
 author:
   - name: Grace Christensen
-    url: https://example.com/norajones
+    url: google.com
     affiliation: Spacely Sprockets
     affiliation_url: https://example.com/spacelysprokets
 date: 04-20-2021
